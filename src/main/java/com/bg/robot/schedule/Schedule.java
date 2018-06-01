@@ -3,6 +3,7 @@ package com.bg.robot.schedule;
 
 import javax.inject.Inject;
 
+import com.bg.robot.service.BTCOrderService;
 import com.bg.robot.service.OrderService;
 
 import org.slf4j.Logger;
@@ -27,11 +28,25 @@ public class Schedule {
     @Inject
     private OrderService orderService;
 
+
+    @Inject
+    private BTCOrderService orderService2;
+
     @Transactional
     @Scheduled(fixedDelay= ONE_Minute)
     public void order() {
         LOGGER.info("机器人-----{}-----start",System.currentTimeMillis());
         orderService.order();
+        LOGGER.info("机器人-----{}-----end",System.currentTimeMillis());
+
+    }
+
+
+    @Transactional
+    @Scheduled(fixedDelay= ONE_Minute)
+    public void order2() {
+        LOGGER.info("机器人-----{}-----start",System.currentTimeMillis());
+        orderService2.order();
         LOGGER.info("机器人-----{}-----end",System.currentTimeMillis());
 
     }
